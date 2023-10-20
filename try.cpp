@@ -2,7 +2,6 @@
 #include <vector>
 #include <cmath>
 
-using namespace std;
 class Vec {
 public:
     float* data;
@@ -17,7 +16,7 @@ public:
 
     Vec operator+(const Vec& other) const{
         if (size!=other.size) {
-            throw invalid_argument("Vectors don't have the same size...");            
+            throw std::invalid_argument("Vectors don't have the same size...");            
         }
         Vec result(size);
         for (int i = 0; i<size;++i){
@@ -29,7 +28,7 @@ public:
 
     Vec operator-(const Vec& other) const{
         if (size!=other.size) {
-            throw invalid_argument("Vectors don't have the same size...");            
+            throw std::invalid_argument("Vectors don't have the same size...");            
         }
         Vec result(size);
         for (int i = 0; i<size;++i){
@@ -72,9 +71,9 @@ public:
     }
     void print() {
         for (int i = 0; i < size; ++i) {
-            cout << data[i] << " ";
+            std::cout << data[i] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 
 private:
@@ -99,18 +98,20 @@ int main(){
     vector2.data[3] = 5;
 
     Vec result = vector1 + vector2; // You can change the operator.
-    Vec result2 = vector1 / 2;
 
-    cout << "After addition, our obtained vector is : ";
     result.print();
-    cout << "And ";
     result.length();
-    cout << endl;
-    cout << "After scalar division , our obtained vector is : ";
-    result2.print();
-    cout << "And ";
-    result2.length();
-    cout << endl;
+    
+    
+    
     return 0;
+
+    
+
+
+
+
+
+
 
 }

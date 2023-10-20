@@ -11,26 +11,44 @@ bool prime_check(int n) {
     }
     return true;
 }
+int power(int a, int b) {
+    int result = 1;
+    for (int i = 0; i < b; i++) {
+        result *= a;
+    }
+    return result;
+}
+int modulo_check(int n, int j){
+    using namespace std;
+    int m = 1;
+    while (power(n,m)%j != 1){
+        m+=1;
+    }
+    return m;
+}
 
 
 int main(){
+    using namespace std;
     int p;
-
     do {
-        std::cout << "pls enter a prime number: ";
-        std::cin >> p;
+        cout << "pls enter a prime number: ";
+        cin >> p;
     } while (!prime_check(p));
-
-    std::vector <int> modulos;
-
-    for (int i = 1; i<p; i++){
-        modulos.push_back(i%p);
+    vector<int> numbers;
+    for (int i =2; i<p; i++){
+        numbers.push_back(modulo_check(i,p));
+    }
+    cout << "Numbers are: [";
+    for (int i = 0; i < numbers.size();i++){
+        if (i == numbers.size()-1){
+            cout<<numbers[i] << "]" <<endl;
+        }
+        else{
+            cout << numbers[i] << ",";
+        }
     }
 
-    std::cout << "Modulos up to p are: ";
-    for (int modulo: modulos) {
-        std::cout <<modulo << ",";
-    }
-    std::cout << std::endl;
+
     return 0;
 }

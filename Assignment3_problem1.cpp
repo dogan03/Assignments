@@ -3,47 +3,69 @@
 #include <algorithm> 
 #include <set>
 #include <string>
-// I did'nt understand if we should add a function to create vector by adding the prices one by one. So I let it to the user.
 
+using namespace std;
 
-float return_second(std::vector<float> vector){
-    std::sort(vector.begin(),vector.end());
-    return vector[vector.size() -2];
+template <typename Temp>
+Temp seclarg(vector<Temp> arr){
+    Temp l1 = arr[0];
+    Temp l2 = arr[0];
+    for (int i = 0; i< arr.size(); i++){
+        l1 = arr[i];
+        if (l1 != l2){
+            break;
+        }
+    }
+    bool eq = true;
+    for(int i=0; i<arr.size();i++){
+        if(arr[i] != l1){
+            eq = false;
+        }
+        if (arr[i]>l1){
+            l2 = l1;
+            l1 = arr[i];
+        } 
+        else if (arr[i] > l2 && arr[i] < l1){
+            l2 = arr[i];
+        }
+    }
+    if (eq) {
+        return Temp(1);
+    }
+    return l2;
+
 }
 
+
 int main(){
-    std::string stop = "n";
-    std::vector<float> vector1;
+    string stop = "n";
+    vector<float> vector1;
     float number_to_add;
-    std::string choice;
-    std::cout<< "Will you add the prices manually? (y/n)";
-    std::cin >> choice;
+    string choice;
+    cout<< "Will you add the prices manually? (y/n) : ";
+    cin >> choice;
     if(choice == "y"){
         while (stop != "y" && stop == "n"){
-            std::cout << "Please add price to the vector!";
-            std::cin >> number_to_add;
+            cout << "Please add price to the vector!: ";
+            cin >> number_to_add;
             vector1.push_back(number_to_add);
-            std::cout << "Do you want to stop adding? (y/n)";
-            std::cin >> stop;
+            cout << "Do you want to stop adding? (y/n): ";
+            cin >> stop;
             while(stop != "n" && stop != "y"){
-                std::cout << "Please write y or n only...";
-                std::cin >> stop;
+                cout << "Please write y or n only... : ";
+                cin >> stop;
             }
     }
 
     } else{
-        std::vector<float> vector1 = {}; // Please add vector here if you choose choice = "n"
+        vector1 = {123,12}; // Please add vector here if you choose choice = "n"
 
     }
-    
-    
-    
-    std::set<float> uniqueprices(vector1.begin(), vector1.end());
-    if(uniqueprices.size() == 1){
-        std::cout << 1 << std::endl;
+    int res,pass = seclarg(vector1);
+    if (pass = 1){
+        cout << seclarg(vector1) << std::endl;
     } else{
-        std::cout << return_second(vector1) << std::endl;
+        cout << 1 << std::endl;
     }
-    
     return 0; 
 }
